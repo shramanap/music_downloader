@@ -1,31 +1,24 @@
-#importing required libraries and modules
-import sys
-from flask import Flask,render_template,jsonify,request, make_response
-import sqlite3
-import shutil
-import os
-import sys
+# importing required libraries and modules
 import operator
 
-app = Flask(__name__)
+from flask import Flask, render_template
 
+from utils import get_chrome_db_connection
+
+DB_QUERY = "select title,url from urls where url like '%www.youtube.com/%' and url like '%/watch?%'"
+
+app = Flask(__name__)
 @app.route('/')
 def index():
-    homeDir = os.environ['HOME']
-    desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop') +'/res'
-    path=homeDir +'/.config/google-chrome/Default/History'
-    shutil.copy2(path, desktop)
-    conn = sqlite3.connect(desktop+'/History')
-    cursor = conn.execute("select title,url from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
-    #urls=conn.execute("select url from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
-    result={}
-
+    conn = get_chrome_db_connection()
+    cursor = conn.execute(DB_QUERY)
+    result = dict()
+    import pdb; pdb.set_trace()
     for row in cursor:
-        result[row[0]]='https://www.youtubeinmp3.com/download/?video='+row[1]
-
+        result[row[0]] = 'https://www.youtubeinmp3.com/download/?video=' + row[1]
     conn.close()
     res = result.items()
     return render_template('rec.html',res=res)
 
 if __name__ == '__main__':
-   app.run(debug = True)
+    app.run(debug=True)
