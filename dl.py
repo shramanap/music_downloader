@@ -1,31 +1,38 @@
+#importing required libraries and modules
+import sys
+from flask import Flask,render_template,jsonify,request, make_response
 import sqlite3
 import shutil
 import os
 import sys
-import json
+import operator
 
-homeDir = os.environ['HOME']
-desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop') +'/res'
-path=homeDir +'/.config/google-chrome/Default/History'
-shutil.copy2(path, desktop)
-conn = sqlite3.connect(desktop+'/History')
-
-cursor = conn.execute("select url from urls where url like '%www.youtube.com/%' and title not like 'YouTube'")
-
-files=desktop+'/res.txt'
-sys.stdout=open(files,"w")
-
-#for row in cursor:
-#   print (row[0])
+app = Flask(__name__)
 
 
-conn.close()
 
 
-import requests
 
-url = 'http://convert2mp3.net/en/'
-payload = {'convertForm' : 'https://www.youtube.com/watch?v=3AtDnEC4zak'}
+@app.route('/')
+def index():
+    homeDir = os.environ['HOME']
+    desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop') +'/res'
+    path=homeDir +'/.config/google-chrome/Default/History'
+    shutil.copy2(path, desktop)
+    conn = sqlite3.connect(desktop+'/History')
+    cursor = conn.execute("select title from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
+    urls=conn.execute("select url from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
+    result={}
+    name=[]
+    i=0
+    for row in cursor:
+        name.append(row[0])
+    for row in urls:
+        result[name[i]]='https://www.youtubeinmp3.com/download/?video='+row[0]
+        i=i+1
+    conn.close()
+    res = sorted(result.items(), key=operator.itemgetter(1))
+    return render_template('rec.html',res=res)
 
-r = requests.post(url,data=json.dumps(payload))
-print (r.text)
+if __name__ == '__main__':
+   app.run(debug = True)
