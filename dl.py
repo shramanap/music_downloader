@@ -9,6 +9,10 @@ import operator
 
 app = Flask(__name__)
 
+
+
+
+
 @app.route('/')
 def index():
     homeDir = os.environ['HOME']
@@ -16,16 +20,13 @@ def index():
     path=homeDir +'/.config/google-chrome/Default/History'
     shutil.copy2(path, desktop)
     conn = sqlite3.connect(desktop+'/History')
-    cursor = conn.execute("select title from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
-    urls=conn.execute("select url from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
+    cursor = conn.execute("select title,url from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
+    #urls=conn.execute("select url from urls where url like '%www.youtube.com/%' and url like '%/watch?%'")
     result={}
-    name=[]
-    i=0
+
     for row in cursor:
-        name.append(row[0])
-    for row in urls:
-        result[name[i]]='https://www.youtubeinmp3.com/download/?video='+row[0]
-        i=i+1
+        result[row[0]]='https://www.youtubeinmp3.com/download/?video='+row[1]
+
     conn.close()
     res = sorted(result.items(), key=operator.itemgetter(1),reverse=True)
     return render_template('rec.html',res=res)
