@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Predict similar products</title>
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    
+    <script>
+            function myFunction() {
+            location.reload();
+            }
+    </script>
+
+  </head>
+ 
+  <body>
+ 
+    <div class="container">
+      
+ 
+     <div class="jumbotron jumbotron-fluid">
+        <h2>Enter product details</h2>
+        </br>
+        <form target="_blank" action="http://127.0.0.1:5000/data" method="post" class="form-inline">
+            <div class="row">
+                <div class="col-2">
+        
+            <input type="text" name="category" id="category"  placeholder="Category" required class="form-control" autofocus>
+            <input type="text" name="subcategory" id="subcategory"  placeholder="Sub Category" class="form-control" autofocus>
+            <input type="text" name="color" id="color"  placeholder="Color" class="form-control" autofocus>
+            <input type="text" name="material" id="material"  placeholder="Material" class="form-control" autofocus>
+            <input type="text" name="shapeoverview" id="shapeoverview"  placeholder="Shape Overview" class="form-control" autofocus>
+            <input type="text" name="surfacedesign" id="surfacedesign"  placeholder="Surface Design" class="form-control" autofocus>
+            <input type="text" name="surfacetexture" id="surfacetexture"  placeholder="Surface Texture" class="form-control" autofocus>
+           
+            <input type="text" name="biodegradable" id="biodegradable"  placeholder="Biodegradable" class="form-control" autofocus>
+            <input type="text" name="lidavailability" id="lidavailability" placeholder="Lid Availability" class="form-control" autofocus>
+            <input type="text" name="recyclable" id="recyclable"  placeholder="Recyclable" class="form-control" autofocus>
+            <input type="text" name="seller" id="seller"  placeholder="Seller" class="form-control" autofocus>
+            <input type="text" name="manufacturer" id="manufacturer"  placeholder="Manufacturer" class="form-control" autofocus>
+            <input type="text" name="foodgrade" id="foodgrade"  placeholder="Foodgrade" class="form-control" autofocus>
+            
+            <input type="text" name="unitdescriptionunit" id="unitdescriptionunit"  placeholder="Unit Description Unit" class="form-control"  autofocus>
+            <input type="text" name="sizesidekey" id="sizesidekey"  placeholder="Size Side Key" class="form-control" autofocus>
+           
+            <input type="text" name="sizebottomkey" id="sizebottomkey"  placeholder="Size Bottom Key" class="form-control" autofocus>
+            
+            
+            <input type="text" name="sizetopkey" id="sizetopkey"  placeholder="Size Top Key" class="form-control" autofocus>
+            
+            
+            
+            </br>
+        </br>
+            <button id="btnsubmit" class="btn btn-lg btn-primary btn-block" type="submit" >Submit</button>
+        </br>
+            <button class="btn btn-danger"  type="reset">Reset</button>
+        </div>
+    </div>
+        </form>
+             
+      </div>
+
+      
+
+ </div>
+       
+ 
+      
+    </div>
+  </body>
+</html>
