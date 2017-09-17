@@ -1,6 +1,7 @@
 # importing required libraries and modules
-from flask import Flask, render_template
 import operator
+
+from flask import Flask, render_template
 
 from utils import get_chrome_db_connection
 
