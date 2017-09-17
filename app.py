@@ -28,7 +28,7 @@ def index():
         result[row[0]]='https://www.youtubeinmp3.com/download/?video='+row[1]
 
     conn.close()
-    res = sorted(result.items(), key=operator.itemgetter(1),reverse=True)
+    res = result.items()
     return render_template('rec.html',res=res)
 
 if __name__ == '__main__':
