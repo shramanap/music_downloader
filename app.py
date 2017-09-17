@@ -9,10 +9,6 @@ import operator
 
 app = Flask(__name__)
 
-
-
-
-
 @app.route('/')
 def index():
     homeDir = os.environ['HOME']
