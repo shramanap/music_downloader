@@ -13,7 +13,6 @@ def index():
     conn = get_chrome_db_connection()
     cursor = conn.execute(DB_QUERY)
     result = dict()
-    import pdb; pdb.set_trace()
     for row in cursor:
         result[row[0]] = 'https://www.youtubeinmp3.com/download/?video=' + row[1]
     conn.close()
